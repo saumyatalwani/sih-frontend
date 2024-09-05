@@ -1,30 +1,35 @@
 import axios from "axios";
 import { Nav } from "./navbar";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function onSubmit(event){
-  event.preventDefault(); // Prevent form from refreshing the page
-  const formData = new FormData(event.target);
-  const values = Object.fromEntries(formData.entries()); // Get form values
-  
-  const data = {
-    name: values.fName+''+values.lName,
-    dob: values.DoB,
-    gender : values.gender,
-  }
-
-  axios.post('http://192.168.2.6:10000/api/issue-document',data).then(response => {
-    console.log(response)
-    if (response.status='200'){
-      Navigate(`/success?id=${response.data.id}`)
-    }
-  })
-
-  
-
-}
 
 export default function Issue() {
+
+  const navigate = useNavigate();
+
+  function onSubmit(event){
+    event.preventDefault(); // Prevent form from refreshing the page
+    const formData = new FormData(event.target);
+    const values = Object.fromEntries(formData.entries()); // Get form values
+    
+    const data = {
+      name: values.fName+' '+values.lName,
+      dob: values.DoB,
+      gender : values.gender,
+    }
+  
+    axios.post('http://127.0.0.1:8000/issue/document/',data).then(response => {
+      console.log(response)
+
+      var dt = JSON.parse(response.data);
+      if (response.status='200'){
+        navigate(`/issued?id=${dt.id}`)
+      }
+    })
+  
+    
+  
+  }
     return (
       <>
       <div className="h-screen bg-indigo-950 font-satoshi">

@@ -3,32 +3,40 @@ import axios from "axios";
 import { useState } from "react";
 import { Nav } from "./navbar";
 import Load from "./loadingIcon";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-async function onSubmit(event){
-  event.preventDefault();
-  const formData = new FormData(event.target);
-
-  //console.log(formData.entries());
-  
-  const data = await axios.post('http://192.168.56.1:5370/image/upload/',formData).then(response => {console.log(response)
-
-    if (response.status=200){
-      Navigate('/verified')
-    }
-  });
-  setLoading(true);
-
-}
 
 export default function Root() {
 
   const [file,setFile]=useState(null);
   const [loading,setLoading]=useState(false);
+  const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
+
+  async function onSubmit(event){
+    event.preventDefault();
+    const formData = new FormData(event.target);
+  
+    //console.log(formData.entries());
+    setLoading(true);
+
+    try{
+    const data = await axios.post('http://127.0.0.1:8000/image/upload/',formData);
+    console.log(data.status);
+    if(data.msg=='validated'){
+    navigate('/verified');} else {
+      navigate('/issue');
+    }
+  } catch(e){
+    console.log(e)
+    navigate('/error');
+  }
+    
+  
+  }
 
     return (
       <>
