@@ -26,7 +26,7 @@ export default function Verify() {
     try{
     const data = await axios.post('http://127.0.0.1:8000/image/upload/',formData);
     console.log(data.status);
-    if(data.msg=='validated'){
+    if(data.data.msg=='validated'){
     navigate('/verified');} else {
       navigate('/notVerified');
     }
