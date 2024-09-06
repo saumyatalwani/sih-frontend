@@ -4,34 +4,40 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Root from './routes/root';
-import Loading from './routes/loading';
 import './index.css'
+
+import Root from './routes/root';
+import Verify from './routes/verify';
 import Verified from './routes/verified';
-import Issue from './routes/create';
+import Issue from './routes/issue';
 import Issued from './routes/issued';
 import Error from './routes/error';
+import NotVerified from './routes/notVerified';
 
 const router = createBrowserRouter([
   {
-    path: "/upload",
-    element: <Root/>,
+    path : '/',
+    element : <Root />
   },
   {
-    path: "/load",
-    element: <Loading/>,
-  },
-  {
-    path: "/issued",
-    element: <Issued/>,
+    path: "/verify",
+    element: <Verify/>,
   },
   {
     path: "/verified",
     element: <Verified/>,
   },
   {
+    path: "/notVerified",
+    element: <NotVerified/>,
+  },
+  {
     path: "/issue",
     element: <Issue/>,
+  },
+  {
+    path: "/issued",
+    element: <Issued/>,
   },
   {
     path: "/error",

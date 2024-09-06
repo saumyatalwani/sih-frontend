@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Nav } from "./navbar";
+import { Nav } from "../components/navbar";
 import { useNavigate } from "react-router-dom";
 
 

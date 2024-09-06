@@ -1,5 +1,5 @@
 import { CheckIcon } from "@primer/octicons-react";
-import { Nav } from "./navbar";
+import { Nav } from "../components/navbar";
 
 export default function Verified() {
     return (

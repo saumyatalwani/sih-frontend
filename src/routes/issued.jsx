@@ -1,6 +1,6 @@
 import { CheckIcon } from "@primer/octicons-react";
 import { useSearchParams } from "react-router-dom";
-import { Nav } from "./navbar";
+import { Nav } from "../components/navbar";
 
 export default function Issued() {
 
